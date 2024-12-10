@@ -8,6 +8,7 @@ use App\Concerns\Accountable;
 use Carbon\CarbonImmutable;
 use Database\Factories\OtherAssetFactory;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,13 +18,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property CarbonImmutable|null $updated_at
  * @property-read Account|null $account
  *
- * @method static \Database\Factories\OtherAssetFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|OtherAsset whereUpdatedAt($value)
+ * @method static OtherAssetFactory factory($count = null, $state = [])
+ * @method static Builder<static>|OtherAsset newModelQuery()
+ * @method static Builder<static>|OtherAsset newQuery()
+ * @method static Builder<static>|OtherAsset query()
+ * @method static Builder<static>|OtherAsset whereCreatedAt($value)
+ * @method static Builder<static>|OtherAsset whereId($value)
+ * @method static Builder<static>|OtherAsset whereUpdatedAt($value)
  *
  * @mixin Eloquent
  */

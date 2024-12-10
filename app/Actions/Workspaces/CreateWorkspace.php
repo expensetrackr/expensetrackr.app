@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\CreatesWorkspaces;
+use App\Events\AddingWorkspace;
 use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Workspaces\Contracts\CreatesWorkspaces;
-use Workspaces\Events\AddingWorkspace;
 
 final class CreateWorkspace implements CreatesWorkspaces
 {

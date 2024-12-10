@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\InvitesWorkspaceMembers;
+use App\Events\InvitingWorkspaceMember;
 use App\Mail\WorkspaceInvitationMail;
 use App\Models\User;
 use App\Models\Workspace;
-use App\Models\WorkspaceInvitation;
+use App\Rules\RoleRule;
 use Closure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
@@ -15,10 +17,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
-use Workspaces\Contracts\InvitesWorkspaceMembers;
-use Workspaces\Events\InvitingWorkspaceMember;
-use Workspaces\Rules\Role;
-use Workspaces\Workspaces;
 
 final class InviteWorkspaceMember implements InvitesWorkspaceMembers
 {
@@ -33,10 +31,10 @@ final class InviteWorkspaceMember implements InvitesWorkspaceMembers
 
         InvitingWorkspaceMember::dispatch($workspace, $email, $role);
 
-        $invitation = type($workspace->workspaceInvitations()->create([
+        $invitation = $workspace->invitations()->create([
             'email' => $email,
             'role' => $role,
-        ]))->as(WorkspaceInvitation::class);
+        ]);
 
         Mail::to($email)->send(new WorkspaceInvitationMail($invitation));
     }
@@ -59,21 +57,20 @@ final class InviteWorkspaceMember implements InvitesWorkspaceMembers
     /**
      * Get the validation rules for inviting a workspace member.
      *
-     * @return array<string, array<int, Unique|string|Role>>
+     * @return array<string, array<int, Unique|string|RoleRule>>
      */
     private function rules(Workspace $workspace): array
     {
-        return array_filter([
+        return [
             'email' => [
-                'required', 'email',
+                'required',
+                'email',
                 Rule::unique('workspace_invitations')->where(function (Builder $query) use ($workspace): void {
                     $query->where('workspace_id', $workspace->id);
                 }),
             ],
-            'role' => Workspaces::hasRoles()
-                ? ['required', 'string', new Role]
-                : null,
-        ]);
+            'role' => ['required', 'string', new RoleRule],
+        ];
     }
 
     /**

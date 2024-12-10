@@ -28,7 +28,7 @@ interface WorkspaceMemberInvitationsProps {
     workspace: Workspace & {
         owner: User;
         workspace_invitations: WorkspaceInvitation[];
-        users: UserMembership[];
+        members: UserMembership[];
     };
     permissions: WorkspacePermissions;
 }

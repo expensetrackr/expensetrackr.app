@@ -45,7 +45,7 @@ interface WorkspaceMemberManagerProps {
     workspace: Workspace & {
         owner: User;
         workspace_invitations: WorkspaceInvitation[];
-        users: UserMembership[];
+        members: UserMembership[];
     };
     availableRoles: Role[];
     permissions: WorkspacePermissions;
@@ -81,8 +81,8 @@ export function WorkspaceMemberManager({ workspace, availableRoles, permissions 
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {workspace.users.length > 0 ? (
-                        workspace.users?.map((user) => (
+                    {workspace.members.length > 0 ? (
+                        workspace.members?.map((user) => (
                             <TableRow key={user.id}>
                                 <TableCell>
                                     <div className="inline-flex items-center gap-3">

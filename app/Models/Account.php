@@ -11,6 +11,7 @@ use App\Enums\AccountSubtype;
 use Carbon\CarbonImmutable;
 use Database\Factories\AccountFactory;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -37,27 +38,28 @@ use Spatie\PrefixedIds\Models\Concerns\HasPrefixedId;
  * @property-read User|null $createdBy
  * @property-read User|null $updatedBy
  * @property-read Workspace $workspace
+ * @property-read string|null $prefixed_id
  *
- * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereAccountableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereAccountableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereCurrencyCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereCurrentBalance($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereInitialBalance($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereIsDefault($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account wherePublicId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereWorkspaceId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Account whereSubtype($value)
+ * @method static AccountFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Account newModelQuery()
+ * @method static Builder<static>|Account newQuery()
+ * @method static Builder<static>|Account query()
+ * @method static Builder<static>|Account whereAccountableId($value)
+ * @method static Builder<static>|Account whereAccountableType($value)
+ * @method static Builder<static>|Account whereCreatedAt($value)
+ * @method static Builder<static>|Account whereCreatedBy($value)
+ * @method static Builder<static>|Account whereCurrencyCode($value)
+ * @method static Builder<static>|Account whereCurrentBalance($value)
+ * @method static Builder<static>|Account whereDescription($value)
+ * @method static Builder<static>|Account whereId($value)
+ * @method static Builder<static>|Account whereInitialBalance($value)
+ * @method static Builder<static>|Account whereIsDefault($value)
+ * @method static Builder<static>|Account whereName($value)
+ * @method static Builder<static>|Account wherePublicId($value)
+ * @method static Builder<static>|Account whereUpdatedAt($value)
+ * @method static Builder<static>|Account whereUpdatedBy($value)
+ * @method static Builder<static>|Account whereWorkspaceId($value)
+ * @method static Builder<static>|Account whereSubtype($value)
  *
  * @mixin Eloquent
  */

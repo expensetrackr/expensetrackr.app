@@ -46,3 +46,4 @@ Route::middleware([
 Route::post('/language', LanguageController::class)->name('language.store');
 
 require __DIR__.'/socialstream.php';
+require __DIR__.'/workspaces.php';

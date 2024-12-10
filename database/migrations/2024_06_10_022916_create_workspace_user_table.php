@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('workspace_users', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('workspace_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
+            $table->foreignId('workspace_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
 
             $table->unique(['workspace_id', 'user_id']);

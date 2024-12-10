@@ -7,6 +7,7 @@ namespace App\Models;
 use Carbon\CarbonImmutable;
 use Database\Factories\ConnectedAccountFactory;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use JoelButcher\Socialstream\ConnectedAccount as SocialstreamConnectedAccount;
@@ -32,25 +33,25 @@ use JoelButcher\Socialstream\Events\ConnectedAccountUpdated;
  * @property CarbonImmutable|null $updated_at
  * @property-read User|null $user
  *
- * @method static \Database\Factories\ConnectedAccountFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereAvatarPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereNickname($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereProvider($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereProviderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereRefreshToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereSecret($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereTelephone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ConnectedAccount whereUserId($value)
+ * @method static ConnectedAccountFactory factory($count = null, $state = [])
+ * @method static Builder<static>|ConnectedAccount newModelQuery()
+ * @method static Builder<static>|ConnectedAccount newQuery()
+ * @method static Builder<static>|ConnectedAccount query()
+ * @method static Builder<static>|ConnectedAccount whereAvatarPath($value)
+ * @method static Builder<static>|ConnectedAccount whereCreatedAt($value)
+ * @method static Builder<static>|ConnectedAccount whereEmail($value)
+ * @method static Builder<static>|ConnectedAccount whereExpiresAt($value)
+ * @method static Builder<static>|ConnectedAccount whereId($value)
+ * @method static Builder<static>|ConnectedAccount whereName($value)
+ * @method static Builder<static>|ConnectedAccount whereNickname($value)
+ * @method static Builder<static>|ConnectedAccount whereProvider($value)
+ * @method static Builder<static>|ConnectedAccount whereProviderId($value)
+ * @method static Builder<static>|ConnectedAccount whereRefreshToken($value)
+ * @method static Builder<static>|ConnectedAccount whereSecret($value)
+ * @method static Builder<static>|ConnectedAccount whereTelephone($value)
+ * @method static Builder<static>|ConnectedAccount whereToken($value)
+ * @method static Builder<static>|ConnectedAccount whereUpdatedAt($value)
+ * @method static Builder<static>|ConnectedAccount whereUserId($value)
  *
  * @mixin Eloquent
  */
@@ -78,7 +79,6 @@ final class ConnectedAccount extends SocialstreamConnectedAccount
     protected function casts(): array
     {
         return [
-            'created_at' => 'datetime',
             'expires_at' => 'datetime',
         ];
     }

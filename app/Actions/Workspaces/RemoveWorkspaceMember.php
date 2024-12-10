@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\RemovesWorkspaceMembers;
+use App\Events\WorkspaceMemberRemoved;
 use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
-use Workspaces\Contracts\RemovesWorkspaceMembers;
-use Workspaces\Events\WorkspaceMemberRemoved;
 
 final class RemoveWorkspaceMember implements RemovesWorkspaceMembers
 {
@@ -23,7 +23,7 @@ final class RemoveWorkspaceMember implements RemovesWorkspaceMembers
 
         $this->ensureUserDoesNotOwnWorkspace($workspaceMember, $workspace);
 
-        $workspace->removeUser($workspaceMember);
+        $workspace->removeMember($workspaceMember);
 
         WorkspaceMemberRemoved::dispatch($workspace, $workspaceMember);
     }
@@ -33,8 +33,10 @@ final class RemoveWorkspaceMember implements RemovesWorkspaceMembers
      */
     private function authorize(User $user, Workspace $workspace, User $workspaceMember): void
     {
-        if (! Gate::forUser($user)->check('removeWorkspaceMember', $workspace) &&
-            $user->id !== $workspaceMember->id) {
+        if (
+            ! Gate::forUser($user)->check('removeWorkspaceMember', $workspace) &&
+            $user->id !== $workspaceMember->id
+        ) {
             throw new AuthorizationException;
         }
     }

@@ -7,10 +7,10 @@ namespace Database\Factories;
 use App\Models\ConnectedAccount;
 use App\Models\User;
 use App\Models\Workspace;
+use App\Utilities\Workspaces\WorkspaceFeatures;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use JoelButcher\Socialstream\Providers;
-use Workspaces\Features as WorkspacesFeatures;
 
 /** @extends Factory<User> */
 final class UserFactory extends Factory
@@ -50,7 +50,7 @@ final class UserFactory extends Factory
      */
     public function withPersonalWorkspace(?callable $callback = null): self
     {
-        if (! WorkspacesFeatures::hasWorkspaceFeatures()) {
+        if (! WorkspaceFeatures::hasWorkspaceFeatures()) {
             return $this->state([]);
         }
 

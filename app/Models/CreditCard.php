@@ -8,6 +8,7 @@ use App\Concerns\Accountable;
 use Carbon\CarbonImmutable;
 use Database\Factories\CreditCardFactory;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,18 +23,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property CarbonImmutable|null $updated_at
  * @property-read Account|null $account
  *
- * @method static \Database\Factories\CreditCardFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereAnnualFee($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereApr($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereAvailableCredit($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereMinimumPayment($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CreditCard whereUpdatedAt($value)
+ * @method static CreditCardFactory factory($count = null, $state = [])
+ * @method static Builder<static>|CreditCard newModelQuery()
+ * @method static Builder<static>|CreditCard newQuery()
+ * @method static Builder<static>|CreditCard query()
+ * @method static Builder<static>|CreditCard whereAnnualFee($value)
+ * @method static Builder<static>|CreditCard whereApr($value)
+ * @method static Builder<static>|CreditCard whereAvailableCredit($value)
+ * @method static Builder<static>|CreditCard whereCreatedAt($value)
+ * @method static Builder<static>|CreditCard whereExpiresAt($value)
+ * @method static Builder<static>|CreditCard whereId($value)
+ * @method static Builder<static>|CreditCard whereMinimumPayment($value)
+ * @method static Builder<static>|CreditCard whereUpdatedAt($value)
  *
  * @mixin Eloquent
  */

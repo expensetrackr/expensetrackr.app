@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\AddsWorkspaceMembers;
+use App\Events\AddingWorkspaceMember;
+use App\Events\WorkspaceMemberAdded;
 use App\Models\User;
 use App\Models\Workspace;
+use App\Models\WorkspaceInvitation;
+use App\Rules\RoleRule;
 use Closure;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Workspaces\Contracts\AddsWorkspaceMembers;
-use Workspaces\Events\AddingWorkspaceMember;
-use Workspaces\Events\WorkspaceMemberAdded;
-use Workspaces\Rules\Role;
-use Workspaces\Workspaces;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 final class AddWorkspaceMember implements AddsWorkspaceMembers
 {
@@ -26,12 +28,13 @@ final class AddWorkspaceMember implements AddsWorkspaceMembers
 
         $this->validate($workspace, $email, $role);
 
-        $newWorkspaceMember = Workspaces::findUserByEmailOrFail($email);
+        $newWorkspaceMember = User::whereEmail($email)->firstOrFail();
 
         AddingWorkspaceMember::dispatch($workspace, $newWorkspaceMember);
 
-        $workspace->users()->attach(
-            $newWorkspaceMember, ['role' => $role]
+        $workspace->members()->attach(
+            $newWorkspaceMember,
+            ['role' => $role]
         );
 
         WorkspaceMemberAdded::dispatch($workspace, $newWorkspaceMember);
@@ -45,7 +48,7 @@ final class AddWorkspaceMember implements AddsWorkspaceMembers
         Validator::make([
             'email' => $email,
             'role' => $role,
-        ], $this->rules(), [
+        ], $this->rules($workspace), [
             'email.exists' => __('We were unable to find a registered user with this email address.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnWorkspace($workspace, $email)
@@ -55,16 +58,14 @@ final class AddWorkspaceMember implements AddsWorkspaceMembers
     /**
      * Get the validation rules for adding a workspace member.
      *
-     * @return array<string, array<int, string|Role>>
+     * @return array<string, array<int, RoleRule|Unique|string>>
      */
-    private function rules(): array
+    private function rules(Workspace $workspace): array
     {
-        return array_filter([
-            'email' => ['required', 'email', 'exists:users'],
-            'role' => Workspaces::hasRoles()
-                ? ['required', 'string', new Role]
-                : null,
-        ]);
+        return [
+            'email' => ['required', 'email', Rule::unique(WorkspaceInvitation::class, 'email')->where('workspace_id', $workspace->id)],
+            'role' => ['required', 'string', new RoleRule],
+        ];
     }
 
     /**

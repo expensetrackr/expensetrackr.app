@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Workspaces\Features;
-use Workspaces\Http\Middleware\AuthenticateSession;
+use App\Http\Middleware\AuthenticateSessionMiddleware;
+use App\Utilities\Workspaces\WorkspaceFeatures;
 
 return [
 
@@ -20,7 +20,7 @@ return [
 
     'middleware' => ['web'],
 
-    'auth_session' => AuthenticateSession::class,
+    'auth_session' => AuthenticateSessionMiddleware::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -47,11 +47,11 @@ return [
     */
 
     'features' => [
-        Features::termsAndPrivacyPolicy(),
-        Features::profilePhotos(),
-        Features::api(),
-        Features::workspaces(['invitations' => true]),
-        Features::accountDeletion(),
+        WorkspaceFeatures::termsAndPrivacyPolicy(),
+        WorkspaceFeatures::profilePhotos(),
+        WorkspaceFeatures::api(),
+        WorkspaceFeatures::workspaces(['invitations' => true]),
+        WorkspaceFeatures::accountDeletion(),
     ],
 
     /*

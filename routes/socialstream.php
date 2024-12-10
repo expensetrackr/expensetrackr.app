@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Utilities\Workspaces\WorkspaceFeatures;
 use Illuminate\Support\Facades\Route;
 use JoelButcher\Socialstream\Http\Controllers\Inertia\ConnectedAccountController;
 use JoelButcher\Socialstream\Http\Controllers\Inertia\PasswordController;
 use JoelButcher\Socialstream\Http\Controllers\Inertia\UpdateUserProfilePhotoController;
 use JoelButcher\Socialstream\Http\Controllers\OAuthController;
 use JoelButcher\Socialstream\Socialstream;
-use Workspaces\Workspaces;
 
 Route::group(['middleware' => config('socialstream.middleware', ['web'])], function () {
     Route::get('/oauth/{provider}', [OAuthController::class, 'redirect'])->name('oauth.redirect');
@@ -22,7 +22,7 @@ Route::group(['middleware' => config('socialstream.middleware', ['web'])], funct
         ->middleware(['auth'])
         ->name('user-password.set');
 
-    if (Socialstream::hasProviderAvatarsFeature() && Workspaces::managesProfilePhotos()) {
+    if (Socialstream::hasProviderAvatarsFeature() && WorkspaceFeatures::managesProfilePhotos()) {
         Route::put('/user/profile-photo', [UpdateUserProfilePhotoController::class, '__invoke'])
             ->middleware(['auth'])
             ->name('user-profile-photo.set');

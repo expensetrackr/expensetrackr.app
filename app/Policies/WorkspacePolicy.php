@@ -41,7 +41,11 @@ final class WorkspacePolicy
      */
     public function update(User $user, Workspace $workspace): bool
     {
-        return $user->ownsWorkspace($workspace);
+        if ($user->ownsWorkspace($workspace)) {
+            return true;
+        }
+
+        return $user->can('update workspace');
     }
 
     /**
@@ -49,7 +53,11 @@ final class WorkspacePolicy
      */
     public function addWorkspaceMember(User $user, Workspace $workspace): bool
     {
-        return $user->ownsWorkspace($workspace);
+        if ($user->ownsWorkspace($workspace)) {
+            return true;
+        }
+
+        return $user->can('add workspace member');
     }
 
     /**
@@ -65,7 +73,11 @@ final class WorkspacePolicy
      */
     public function removeWorkspaceMember(User $user, Workspace $workspace): bool
     {
-        return $user->ownsWorkspace($workspace);
+        if ($user->ownsWorkspace($workspace)) {
+            return true;
+        }
+
+        return $user->can('remove workspace member');
     }
 
     /**

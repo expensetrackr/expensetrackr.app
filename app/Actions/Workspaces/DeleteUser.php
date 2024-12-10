@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\DeletesUsers;
 use App\Models\User;
-use App\Models\Workspace;
 use Illuminate\Support\Facades\DB;
-use Workspaces\Contracts\DeletesUsers;
 
 final readonly class DeleteUser implements DeletesUsers
 {
@@ -43,7 +42,7 @@ final readonly class DeleteUser implements DeletesUsers
         $user->workspaces()->detach();
 
         $user->ownedWorkspaces->each(function ($workspace): void {
-            $this->deleteWorkspaces->delete(type($workspace)->as(Workspace::class));
+            $this->deleteWorkspaces->delete($workspace);
         });
     }
 }

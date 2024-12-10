@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\DeletesWorkspaces;
 use App\Models\Workspace;
-use Workspaces\Contracts\DeletesWorkspaces;
 
 final class DeleteWorkspace implements DeletesWorkspaces
 {

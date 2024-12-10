@@ -10,11 +10,10 @@ use App\Services\AccountWizardService;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 use Inertia\Response;
 use InvalidArgumentException;
-use Workspaces\Workspaces;
 
 final class AccountController extends Controller
 {
@@ -28,11 +27,11 @@ final class AccountController extends Controller
     /**
      * Display all accounts.
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
         Gate::authorize('viewAny', Account::class);
 
-        return Workspaces::inertia()->render($request, 'accounts/index', [
+        return Inertia::render('accounts/index', [
             'accounts' => Account::all()->sortBy('name'),
         ]);
     }
@@ -40,11 +39,11 @@ final class AccountController extends Controller
     /**
      * Create a new account
      */
-    public function create(Request $request): Response
+    public function create(): Response
     {
         Gate::authorize('create', Account::class);
 
-        return Workspaces::inertia()->render($request, 'accounts/create/index');
+        return Inertia::render('accounts/create/index');
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Concerns\Accountable;
 use Carbon\CarbonImmutable;
 use Database\Factories\InvestmentFactory;
 use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,13 +18,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property CarbonImmutable|null $updated_at
  * @property-read Account|null $account
  *
- * @method static \Database\Factories\InvestmentFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Investment whereUpdatedAt($value)
+ * @method static InvestmentFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Investment newModelQuery()
+ * @method static Builder<static>|Investment newQuery()
+ * @method static Builder<static>|Investment query()
+ * @method static Builder<static>|Investment whereCreatedAt($value)
+ * @method static Builder<static>|Investment whereId($value)
+ * @method static Builder<static>|Investment whereUpdatedAt($value)
  *
  * @mixin Eloquent
  */

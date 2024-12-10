@@ -6,29 +6,29 @@ namespace App\Models;
 
 use Carbon\CarbonImmutable;
 use Eloquent;
-use Workspaces\Membership as BaseMembership;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
  * @property int $id
  * @property int $workspace_id
  * @property int $user_id
- * @property string|null $role
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Membership whereWorkspaceId($value)
+ * @method static Builder<static>|Membership newModelQuery()
+ * @method static Builder<static>|Membership newQuery()
+ * @method static Builder<static>|Membership query()
+ * @method static Builder<static>|Membership whereCreatedAt($value)
+ * @method static Builder<static>|Membership whereId($value)
+ * @method static Builder<static>|Membership whereRole($value)
+ * @method static Builder<static>|Membership whereUpdatedAt($value)
+ * @method static Builder<static>|Membership whereUserId($value)
+ * @method static Builder<static>|Membership whereWorkspaceId($value)
  *
  * @mixin Eloquent
  */
-final class Membership extends BaseMembership
+final class Membership extends Pivot
 {
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -36,4 +36,9 @@ final class Membership extends BaseMembership
      * @var bool
      */
     public $incrementing = true;
+
+    /**
+     * The table associated with the pivot model.
+     */
+    protected $table = 'workspace_users';
 }

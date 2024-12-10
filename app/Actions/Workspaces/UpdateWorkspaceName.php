@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Actions\Workspaces;
 
+use App\Contracts\UpdatesWorkspaceNames;
 use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Workspaces\Contracts\UpdatesWorkspaceNames;
 
 final class UpdateWorkspaceName implements UpdatesWorkspaceNames
 {
